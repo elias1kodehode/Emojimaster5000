@@ -1,0 +1,326 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@300..700&display=swap");
+:root {
+  --page-bg: #f4f1ea;
+  --surface: #ffffff;
+
+  --card-back: #264653;
+  --card-front: #cdccca;
+  --card-matched: #157066;
+
+  --text: #1f2933;
+  --muted-text: #6b7280;
+
+  --focus: #1f1e1e;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-family: "Fredoka", sans-serif;
+  border-bottom: rgba(0, 0, 0, 0.5) solid 1px;
+  padding: 0.2rem;
+}
+#game-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+h1 {
+  font-size: clamp(1.5rem, 1rem + 3vw, 3.5rem);
+  font-family: "Bungee", sans-serif;
+}
+footer {
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #f8fafc, #5b6067);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  justify-content: center;
+  align-items: center;
+}
+#game-board {
+  align-items: start;
+  display: grid;
+  gap: 0.5rem;
+  margin: auto;
+}
+.card.selected {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  width: 100%;
+  background: var(--card-back);
+  border-radius: 0.75rem;
+  border: none;
+  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 0.18);
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    background-color 200ms ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.4rem 0.8rem rgb(0 0 0 / 0.25);
+}
+.card.matched {
+  opacity: 0.9;
+  transform: scale(0.94);
+  background-color: var(--card-matched);
+}
+
+.flipped {
+  background-color: var(--card-front);
+}
+.matched {
+  background-color: var(--card-matched);
+}
+.card-symbol {
+  visibility: hidden;
+}
+.card.flipped .card-symbol {
+  visibility: visible;
+}
+
+/* RANGE SLIDER */
+input[type="range"] {
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"] {
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Chrome / Edge / Safari */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  background: var(--card-back);
+  border-radius: 1rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: -0.5rem;
+
+  background: var(--card-front);
+  border: 2px solid var(--focus);
+  border-radius: 50%;
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-track {
+  height: 0.5rem;
+  background: var(--card-back);
+  border-radius: 1rem;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  background: var(--card-front);
+  border: 2px solid var(--focus);
+  border-radius: 50%;
+}
+
+/* Keyboard focus */
+input[type="range"]:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 0.4rem;
+}
+
+.card {
+  transform: scaleX(1);
+
+  transition:
+    transform 250ms ease,
+    box-shadow 150ms ease,
+    background-color 200ms ease;
+}
+
+.card:hover:not(.flipped):not(.matched) {
+  transform: translateY(-3px);
+  box-shadow: 0 0.4rem 0.8rem rgb(0 0 0 / 0.25);
+}
+
+.card.flipped {
+  transform: scaleX(-1);
+  background-color: var(--card-front);
+}
+
+.card-symbol {
+  visibility: hidden;
+  transform: scaleX(-1);
+
+  transition: visibility 0s linear 125ms;
+}
+
+.card.flipped .card-symbol {
+  visibility: visible;
+}
+
+.card.matched {
+  transform: scaleX(-1) scale(0.94);
+  opacity: 0.9;
+  background-color: var(--card-matched);
+}
+button {
+  border: none;
+  border-radius: 0.75rem;
+
+  padding: 0.7rem 1.2rem;
+
+  background: var(--card-back);
+  color: var(--surface);
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 0.18);
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.4rem 0.8rem rgb(0 0 0 / 0.24);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 0.15rem 0.3rem rgb(0 0 0 / 0.18);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.card.matched {
+  background-color: var(--card-matched);
+  animation: matched-glow 700ms ease-in-out 2;
+}
+
+@keyframes matched-glow {
+  0% {
+    box-shadow:
+      0 0 0 0 var(--card-matched),
+      0 0.25rem 0.5rem rgb(0 0 0 / 0.18);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 10px rgb(21 112 102 / 0.35),
+      0 0 1.2rem rgb(21 112 102 / 0.7);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 0 var(--card-matched),
+      0 0.25rem 0.5rem rgb(0 0 0 / 0.18);
+  }
+}
+#win-dialog {
+  border: none;
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+
+  background: var(--surface);
+  color: var(--text);
+
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 0.35);
+
+  font-family: "Fredoka", sans-serif;
+  text-align: center;
+  margin: auto;
+}
+
+#win-dialog::backdrop {
+  background: rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(3px);
+}
+
+/* CONFETTI */
+
+#win-dialog {
+  overflow: visible;
+}
+
+#confetti-container {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: 0;
+}
+
+/* Keep dialog text/button above the confetti */
+#win-dialog > *:not(#confetti-container) {
+  position: relative;
+  z-index: 1;
+}
+
+.confetti {
+  position: absolute;
+
+  top: -20px;
+
+  width: 10px;
+  height: 16px;
+
+  border-radius: 2px;
+
+  animation: confetti-fall var(--fall-duration) ease-in var(--fall-delay)
+    forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(var(--drift)) translateY(110vh) rotate(var(--spin));
+
+    opacity: 0;
+  }
+}
